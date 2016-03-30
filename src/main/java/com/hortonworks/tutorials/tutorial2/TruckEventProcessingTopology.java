@@ -60,9 +60,14 @@ public class TruckEventProcessingTopology extends BaseTruckEventTopology
         TopologyBuilder builder = new TopologyBuilder();
         configureKafkaSpout(builder);
         configureLogTruckEventBolt(builder);
-        
+        builder.setBolt("writer", new CassandraWriterBolt())
+                .shuffleGrouping(LOG_TRUCK_BOLT_ID, "logEvents");        
         Config conf = new Config();
 	conf.setDebug(true);
+	//Copy properies to storm config
+        for (String name : topologyConfig.stringPropertyNames()) {
+            conf.put(name, topologyConfig.getProperty(name));
+        }
         
         StormSubmitter.submitTopology("truck-event-processor", 
                                     conf, builder.createTopology());

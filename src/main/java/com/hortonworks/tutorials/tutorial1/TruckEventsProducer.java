@@ -97,7 +97,7 @@ public class TruckEventsProducer {
           KeyedMessage<String, String> data = new KeyedMessage<String, String>(TOPIC, finalEvent);
           LOG.info("Sending Messge #: " + routeName[0] + ": " + i + ", msg:" + finalEvent);
           producer.send(data);
-          Thread.sleep(1000);
+          Thread.sleep(10);
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -109,7 +109,7 @@ public class TruckEventsProducer {
           KeyedMessage<String, String> data = new KeyedMessage<String, String>(TOPIC, finalEvent);
           LOG.info("Sending Messge #: " + routeName[1] + ": " + i + ", msg:" + finalEvent);
           producer.send(data);
-          Thread.sleep(1000);
+          Thread.sleep(10);
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -121,7 +121,7 @@ public class TruckEventsProducer {
           KeyedMessage<String, String> data = new KeyedMessage<String, String>(TOPIC, finalEvent);
           LOG.info("Sending Messge #: " + routeName[2] + ": " + i + ", msg:" + finalEvent);
           producer.send(data);
-          Thread.sleep(1000);
+          Thread.sleep(10);
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -133,7 +133,7 @@ public class TruckEventsProducer {
           KeyedMessage<String, String> data = new KeyedMessage<String, String>(TOPIC, finalEvent);
           LOG.info("Sending Messge #: " + routeName[3] + ": " + i + ", msg:" + finalEvent);
           producer.send(data);
-          Thread.sleep(1000);
+          Thread.sleep(10);
         } catch (Exception e) {
           e.printStackTrace();
         }
