@@ -1,4 +1,4 @@
-# storm_kafka_tutorial
+# storm kafka cassandra benchmark test
 
 Implemented a simple Kafka + STORM + Cassandra Pipeline.
 
