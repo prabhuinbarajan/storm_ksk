@@ -2,8 +2,8 @@ package com.hippocamp.ksk.producer;
 
 /**
  * TruckEventsProducer class simulates the real time truck event generation.
- *
  */
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,10 +23,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 
-
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-
 
 
 import org.apache.log4j.Logger;
@@ -56,24 +54,22 @@ public class TruckEventsProducer {
     props.put("request.required.acks", "1");
     */
         String TOPIC = "truckevent";
-        KafkaProducer<String, String> producer=null;
-        try{
+        KafkaProducer<String, String> producer = null;
+        try {
             InputStream props = Resources.getResource("producer.props").openStream();
             Properties properties = new Properties();
             properties.load(props);
             producer = new KafkaProducer<String, String>(properties);
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-
-
-        String[] events = { "Normal", "Normal", "Normal", "Normal", "Normal", "Normal", "Lane Departure", "Overspeed",
+        String[] events = {"Normal", "Normal", "Normal", "Normal", "Normal", "Normal", "Lane Departure", "Overspeed",
                 "Normal", "Normal", "Normal", "Normal", "Lane Departure", "Normal", "Normal", "Normal", "Normal",
                 "Unsafe tail distance", "Normal", "Normal", "Unsafe following distance", "Normal", "Normal", "Normal",
                 "Normal", "Normal", "Normal", "Normal", "Normal", "Normal", "Normal", "Normal", "Normal", "Normal", "Normal",
-                "Overspeed", "Normal", "Normal", "Normal", "Normal", "Normal", "Normal", "Normal" };
+                "Overspeed", "Normal", "Normal", "Normal", "Normal", "Normal", "Normal", "Normal"};
 
         Random random = new Random();
 
@@ -88,9 +84,9 @@ public class TruckEventsProducer {
         String route27 = "route27.kml";
         String[] arrayroute27 = GetKmlLanLangList(route27);
 
-        String[] truckIds = { "1", "2", "3", "4" };
-        String[] routeName = { "route17", "route17k", "route208", "route27" };
-        String[] driverIds = { "11", "12", "13", "14" };
+        String[] truckIds = {"1", "2", "3", "4"};
+        String[] routeName = {"route17", "route17k", "route208", "route27"};
+        String[] driverIds = {"11", "12", "13", "14"};
 
         int evtCnt = events.length;
 
