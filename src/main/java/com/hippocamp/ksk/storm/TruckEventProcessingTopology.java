@@ -12,10 +12,7 @@ import storm.kafka.KafkaSpout;
 import storm.kafka.SpoutConfig;
 import storm.kafka.ZkHosts;
 
-/**
- *
- * @author Kumar Kandasami
- */
+
 public class TruckEventProcessingTopology extends BaseTruckEventTopology 
 {
     private static final String KAFKA_SPOUT_ID = "kafkaSpout"; 
@@ -66,7 +63,7 @@ public class TruckEventProcessingTopology extends BaseTruckEventTopology
         builder.setBolt("writer", new CassandraWriterBolt())
                 .shuffleGrouping(LOG_TRUCK_BOLT_ID, "logEvents");        
         Config conf = new Config();
-	conf.setDebug(true);
+	    conf.setDebug(true);
 	//Copy properies to storm config
         for (String name : topologyConfig.stringPropertyNames()) {
             conf.put(name, topologyConfig.getProperty(name));

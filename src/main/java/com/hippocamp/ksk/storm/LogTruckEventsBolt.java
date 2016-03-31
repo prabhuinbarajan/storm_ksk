@@ -14,10 +14,7 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
-/**
- *
- * @author Kumar Kandasami
- */
+
 public class LogTruckEventsBolt extends BaseRichBolt
 {
     private static final Logger LOG = Logger.getLogger(LogTruckEventsBolt.class);

@@ -45,14 +45,6 @@ public class TruckEventsProducer {
 
         // long events = Long.parseLong(args[0]);
         Random rnd = new Random();
-
-    /*
-    Properties props = new Properties();
-    props.put("metadata.broker.list", args[0]);
-    props.put("zk.connect", args[1]);
-    props.put("serializer.class", "kafka.serializer.StringEncoder");
-    props.put("request.required.acks", "1");
-    */
         String TOPIC = "truckevent";
         KafkaProducer<String, String> producer = null;
         try {
