@@ -1,5 +1,4 @@
-package com.hortonworks.tutorials.tutorial4;
-
+package com.hippocamp.ksk.storm;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
@@ -63,7 +62,7 @@ public class TruckScheme implements Scheme
 	public Fields getOutputFields()
         {
             return new Fields(FIELD_DRIVER_ID,
-                              FIELD_TRUCK_ID,
+                              FIELD_TRUCK_ID, 
                              FIELD_EVENT_TIME, 
                              FIELD_EVENT_TYPE, 
                              FIELD_LONGITUDE, 

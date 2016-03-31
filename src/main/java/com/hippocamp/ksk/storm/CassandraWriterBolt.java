@@ -1,4 +1,5 @@
-package com.hortonworks.tutorials.tutorial2;
+package com.hippocamp.ksk.storm;
+
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.OutputFieldsDeclarer;

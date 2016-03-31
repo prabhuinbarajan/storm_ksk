@@ -1,5 +1,6 @@
-package com.hortonworks.tutorials.tutorial4;
+package com.hippocamp.ksk.storm;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;

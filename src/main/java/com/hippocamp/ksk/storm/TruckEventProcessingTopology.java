@@ -1,9 +1,12 @@
-package com.hortonworks.tutorials.tutorial2;
+package com.hippocamp.ksk.storm;
 
 import backtype.storm.Config;
+import backtype.storm.LocalCluster;
+
 import backtype.storm.StormSubmitter;
 import backtype.storm.spout.SchemeAsMultiScheme;
 import backtype.storm.topology.TopologyBuilder;
+import org.apache.commons.cli.*;
 import storm.kafka.BrokerHosts;
 import storm.kafka.KafkaSpout;
 import storm.kafka.SpoutConfig;
@@ -17,7 +20,7 @@ public class TruckEventProcessingTopology extends BaseTruckEventTopology
 {
     private static final String KAFKA_SPOUT_ID = "kafkaSpout"; 
     private static final String LOG_TRUCK_BOLT_ID = "logTruckEventBolt";
-            
+
     public TruckEventProcessingTopology(String configFileLocation) throws Exception 
     {
         super(configFileLocation);
@@ -55,7 +58,7 @@ public class TruckEventProcessingTopology extends BaseTruckEventTopology
         builder.setBolt(LOG_TRUCK_BOLT_ID, logBolt).globalGrouping(KAFKA_SPOUT_ID);
     }
     
-    private void buildAndSubmit() throws Exception
+    private void buildAndSubmit(CommandLine cmd) throws Exception
     {
         TopologyBuilder builder = new TopologyBuilder();
         configureKafkaSpout(builder);
@@ -68,17 +71,41 @@ public class TruckEventProcessingTopology extends BaseTruckEventTopology
         for (String name : topologyConfig.stringPropertyNames()) {
             conf.put(name, topologyConfig.getProperty(name));
         }
-        
-        StormSubmitter.submitTopology("truck-event-processor", 
-                                    conf, builder.createTopology());
+        if(cmd.hasOption("l")) {
+            LocalCluster cluster = new LocalCluster();
+            cluster.submitTopology("truck-event-processor",
+                    conf, builder.createTopology());
+        }else {
+
+            StormSubmitter.submitTopology("truck-event-processor",
+                    conf, builder.createTopology());
+        }
+
     }
 
     public static void main(String[] str) throws Exception
     {
-        String configFileLocation = "truck_event_topology.properties";
-        TruckEventProcessingTopology truckTopology 
-                = new TruckEventProcessingTopology(configFileLocation);
-        truckTopology.buildAndSubmit();
+        CommandLineParser parser = new BasicParser();
+        Options options = new Options();
+        options.addOption("l", "local", false, "Here you can set parameter .");
+
+        CommandLine cmd = null;
+        try {
+            cmd = parser.parse(options, str);
+
+            String configFileLocation = "truck_event_topology.properties";
+            if(cmd.hasOption("l")) {
+                configFileLocation = "truck_event_topology_local.properties";
+            }
+            TruckEventProcessingTopology truckTopology
+                    = new TruckEventProcessingTopology(configFileLocation);
+
+            truckTopology.buildAndSubmit(cmd);
+        }  catch (ParseException e) {
+            System.err.println( "Failed to parse comand line properties" + e);
+        }
+
+
     }
 
 }
